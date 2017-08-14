@@ -1,0 +1,22 @@
+metadata:
+  labels:
+    hystrix.enabled: "true"
+spec:
+  selector:
+    matchLabels:
+      hystrix.enabled: "true"
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        hystrix.enabled: "true"
+    spec:
+      containers:
+        -
+          resources:
+            requests:
+              cpu: "0.2"
+              memory: 256Mi
+            limits:
+              cpu: "1.0"
+              memory: 256Mi
