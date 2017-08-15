@@ -8,11 +8,6 @@ objects:
   kind: Service
   metadata:
     annotations:
-      fabric8.io/git-branch: master
-      fabric8.io/git-commit: b70a6ced084e66b373998cf7d5df60f298c52ed5
-      fabric8.io/iconUrl: img/icons/camel.svg
-      fabric8.io/scm-tag: HEAD
-      fabric8.io/scm-url: https://github.com/spring-projects/spring-boot/spring-boot-starter-parent/camel-example-hystrix-client
       prometheus.io/port: "9779"
       prometheus.io/scrape: "true"
     creationTimestamp: null
@@ -35,8 +30,7 @@ objects:
       provider: fabric8
     sessionAffinity: None
     type: ClusterIP
-  status:
-    loadBalancer: {}
+  status: []
 - apiVersion: v1
   kind: Route
   metadata:
@@ -51,7 +45,6 @@ objects:
       version: 1.0-SNAPSHOT
     name: camel-example-hystrix-client
   spec:
-    host: camel-example-hystrix-client-hystrixdemo-developer.192.168.137.2.nip.io
     port:
       targetPort: 8080
     to:
@@ -59,15 +52,7 @@ objects:
       name: camel-example-hystrix-client
       weight: 100
     wildcardPolicy: None
-  status:
-    ingress:
-    - conditions:
-      - lastTransitionTime: 2017-08-15T04:55:31Z
-        status: "True"
-        type: Admitted
-      host: camel-example-hystrix-client-hystrixdemo-developer.192.168.137.2.nip.io
-      routerName: router
-      wildcardPolicy: None
+  status: []
 - apiVersion: v1
   kind: ImageStream
   metadata:
@@ -79,37 +64,15 @@ objects:
       provider: fabric8
       version: 1.0-SNAPSHOT
     name: camel-example-hystrix-client
-  spec:
-    lookupPolicy:
-      local: false
-    tags:
-    - annotations: null
-      from:
-        kind: DockerImage
-        name: 172.30.1.1:5000/hystrixdemo-developer/camel-example-hystrix-client:latest
-      generation: null
-      importPolicy: {}
-      name: latest
-      referencePolicy:
-        type: ""
-  status:
-    dockerImageRepository: ""
 - apiVersion: v1
   kind: DeploymentConfig
   metadata:
-    annotations:
-      fabric8.io/git-branch: master
-      fabric8.io/git-commit: b70a6ced084e66b373998cf7d5df60f298c52ed5
-      fabric8.io/iconUrl: img/icons/camel.svg
-      fabric8.io/metrics-path: dashboard/file/camel-routes.json/?var-project=camel-example-hystrix-client&var-version=1.0-SNAPSHOT
-      fabric8.io/scm-tag: HEAD
-      fabric8.io/scm-url: https://github.com/spring-projects/spring-boot/spring-boot-starter-parent/camel-example-hystrix-client
+    annotations: null
     creationTimestamp: null
     generation: 1
     labels:
       app: camel-example-hystrix-client
       group: sample.camel
-      hystrix.enabled: "true"
       provider: fabric8
       version: 1.0-SNAPSHOT
     name: camel-example-hystrix-client
@@ -118,7 +81,6 @@ objects:
     selector:
       app: camel-example-hystrix-client
       group: sample.camel
-      hystrix.enabled: "true"
       provider: fabric8
     strategy:
       activeDeadlineSeconds: 21600
@@ -132,18 +94,11 @@ objects:
       type: Rolling
     template:
       metadata:
-        annotations:
-          fabric8.io/git-branch: master
-          fabric8.io/git-commit: b70a6ced084e66b373998cf7d5df60f298c52ed5
-          fabric8.io/iconUrl: img/icons/camel.svg
-          fabric8.io/metrics-path: dashboard/file/camel-routes.json/?var-project=camel-example-hystrix-client&var-version=1.0-SNAPSHOT
-          fabric8.io/scm-tag: HEAD
-          fabric8.io/scm-url: https://github.com/spring-projects/spring-boot/spring-boot-starter-parent/camel-example-hystrix-client
+        annotations: null
         creationTimestamp: null
         labels:
           app: camel-example-hystrix-client
           group: sample.camel
-          hystrix.enabled: "true"
           provider: fabric8
           version: 1.0-SNAPSHOT
       spec:
@@ -156,7 +111,7 @@ objects:
                 fieldPath: metadata.namespace
           - name: JAVA_APP_DIR
             value: /deployments
-          image: 172.30.1.1:5000/hystrixdemo-developer/camel-example-hystrix-client@sha256:016629edd4ade98fe04b6ed4de884d7f487b2b40e86aff7dc4fb0020ee94e409
+          image: camel-example-hystrix-client:latest
           imagePullPolicy: IfNotPresent
           name: spring-boot
           ports:
@@ -197,13 +152,7 @@ objects:
           name: camel-example-hystrix-client:latest
           namespace: hystrixdemo-developer
       type: ImageChange
-  status:
-    availableReplicas: 0
-    latestVersion: 0
-    observedGeneration: 0
-    replicas: 0
-    unavailableReplicas: 0
-    updatedReplicas: 0
+  status: []
 - apiVersion: v1
   kind: BuildConfig
   metadata:
@@ -225,16 +174,29 @@ objects:
     resources: {}
     runPolicy: Serial
     source:
-      binary: {}
-      type: Binary
+      contextDir: client
+      git:
+        uri: https://github.com/eformat/camel-example-hystrix.git
+      type: Git
     strategy:
       sourceStrategy:
+        env:
+        - name: MAVEN_MIRROR_URL
+          value: http://nexus.nexus.svc.cluster.local:8081/repository/maven-public/
         from:
           kind: ImageStreamTag
           name: fis-java-openshift:latest
           namespace: openshift
       type: Source
     successfulBuildsHistoryLimit: 5
-    triggers: []
-  status:
-    lastVersion: 0
+    triggers:
+    - github:
+        secret: secret1
+      type: GitHub
+    - generic:
+        secret: secret1
+      type: Generic
+    - type: ConfigChange
+    - imageChange: {}
+      type: ImageChange
+  status: []
