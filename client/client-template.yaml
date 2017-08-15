@@ -13,6 +13,7 @@ objects:
     creationTimestamp: null
     labels:
       app: camel-example-hystrix-client
+      hystrix.enabled: "true"
       expose: "true"
       group: sample.camel
       provider: fabric8
@@ -39,7 +40,6 @@ objects:
     creationTimestamp: null
     labels:
       app: camel-example-hystrix-client
-      hystrix.enabled: "true"
       expose: "true"
       group: sample.camel
       provider: fabric8
