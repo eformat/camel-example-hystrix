@@ -5,6 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ImportResource;
 
 /**
  * A Spring Boot application that runs the Camel Hystrix client application that calls service 1 and service 2 (as fallback)
