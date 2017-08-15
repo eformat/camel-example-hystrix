@@ -9,7 +9,7 @@ public class ClientRoute extends RouteBuilder {
     @Override
     public void configure() {
         // you can configure the route rule with Java DSL here
-        from("timer:trigger?period=500").streamCaching()
+        from("timer:trigger?period=1000").streamCaching()
             .bean("counterBean")
             .log(" Client request: ${body}")
             .hystrix()
