@@ -15,13 +15,13 @@ public class ClientRoute extends RouteBuilder {
             .hystrix()
                 .id("service1")
                 // see application.properties how hystrix is configured
-                .to("http://camel-example-hystrix-service1:9090/service1")
+                .to("http://camel-example-hystrix-service1:8080/service1")
             //.onFallback()
             // we use a fallback without network that provides a repsonse message immediately
             //    .transform().simple("Fallback ${body}")
             .onFallbackViaNetwork()
                 // we use fallback via network where we call a 2nd service
-                .to("http://camel-example-hystrix-service2:7070/service2")
+                .to("http://camel-example-hystrix-service2:8080/service2")
             .end()
             .log("Client response: ${body}");
     }
