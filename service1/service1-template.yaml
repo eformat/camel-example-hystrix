@@ -82,7 +82,7 @@ objects:
 - apiVersion: v1
   kind: DeploymentConfig
   metadata:
-    annotations: []
+    annotations: null
     creationTimestamp: null
     generation: 1
     labels:
@@ -109,7 +109,7 @@ objects:
       type: Rolling
     template:
       metadata:
-        annotations: []
+        annotations: null
         creationTimestamp: null
         labels:
           app: camel-example-hystrix-service1
