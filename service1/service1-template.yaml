@@ -8,11 +8,6 @@ objects:
   kind: Service
   metadata:
     annotations:
-      fabric8.io/git-branch: master
-      fabric8.io/git-commit: e32b64488650c11072d2c77114b0acb07457081e
-      fabric8.io/iconUrl: img/icons/camel.svg
-      fabric8.io/scm-tag: HEAD
-      fabric8.io/scm-url: https://github.com/spring-projects/spring-boot/spring-boot-starter-parent/camel-example-hystrix-service1
       prometheus.io/port: "9779"
       prometheus.io/scrape: "true"
     creationTimestamp: null
@@ -35,8 +30,7 @@ objects:
       provider: fabric8
     sessionAffinity: None
     type: ClusterIP
-  status:
-    loadBalancer: {}
+  status: []
 - apiVersion: v1
   kind: Route
   metadata:
@@ -59,15 +53,7 @@ objects:
       name: camel-example-hystrix-service1
       weight: 100
     wildcardPolicy: None
-  status:
-    ingress:
-    - conditions:
-      - lastTransitionTime: 2017-08-15T04:49:54Z
-        status: "True"
-        type: Admitted
-      host: camel-example-hystrix-service1-hystrixdemo-developer.192.168.137.2.nip.io
-      routerName: router
-      wildcardPolicy: None
+  status: []
 - apiVersion: v1
   kind: ImageStream
   metadata:
@@ -92,18 +78,11 @@ objects:
       name: latest
       referencePolicy:
         type: ""
-  status:
-    dockerImageRepository: ""
+  status: []
 - apiVersion: v1
   kind: DeploymentConfig
   metadata:
-    annotations:
-      fabric8.io/git-branch: master
-      fabric8.io/git-commit: e32b64488650c11072d2c77114b0acb07457081e
-      fabric8.io/iconUrl: img/icons/camel.svg
-      fabric8.io/metrics-path: dashboard/file/camel-routes.json/?var-project=camel-example-hystrix-service1&var-version=1.0-SNAPSHOT
-      fabric8.io/scm-tag: HEAD
-      fabric8.io/scm-url: https://github.com/spring-projects/spring-boot/spring-boot-starter-parent/camel-example-hystrix-service1
+    annotations: []
     creationTimestamp: null
     generation: 1
     labels:
@@ -130,13 +109,7 @@ objects:
       type: Rolling
     template:
       metadata:
-        annotations:
-          fabric8.io/git-branch: master
-          fabric8.io/git-commit: e32b64488650c11072d2c77114b0acb07457081e
-          fabric8.io/iconUrl: img/icons/camel.svg
-          fabric8.io/metrics-path: dashboard/file/camel-routes.json/?var-project=camel-example-hystrix-service1&var-version=1.0-SNAPSHOT
-          fabric8.io/scm-tag: HEAD
-          fabric8.io/scm-url: https://github.com/spring-projects/spring-boot/spring-boot-starter-parent/camel-example-hystrix-service1
+        annotations: []
         creationTimestamp: null
         labels:
           app: camel-example-hystrix-service1
@@ -153,7 +126,7 @@ objects:
                 fieldPath: metadata.namespace
           - name: JAVA_APP_DIR
             value: /deployments
-          image: 172.30.1.1:5000/hystrixdemo-developer/camel-example-hystrix-service1@sha256:12cef13ad5416a5ab2ccb652dd88956c688cf8d4e7dfe634a8af896e3a066333
+          image: camel-example-hystrix-service1:latest
           imagePullPolicy: IfNotPresent
           name: spring-boot
           ports:
@@ -194,13 +167,7 @@ objects:
           name: camel-example-hystrix-service1:latest
           namespace: hystrixdemo-developer
       type: ImageChange
-  status:
-    availableReplicas: 0
-    latestVersion: 0
-    observedGeneration: 0
-    replicas: 0
-    unavailableReplicas: 0
-    updatedReplicas: 0
+  status: []
 - apiVersion: v1
   kind: BuildConfig
   metadata:
@@ -233,5 +200,4 @@ objects:
       type: Source
     successfulBuildsHistoryLimit: 5
     triggers: []
-  status:
-    lastVersion: 0
+  status: []
