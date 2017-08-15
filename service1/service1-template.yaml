@@ -204,6 +204,7 @@ objects:
           namespace: openshift
       type: Source
     successfulBuildsHistoryLimit: 5
+    triggers:
     - github:
         secret: secret1
       type: GitHub
