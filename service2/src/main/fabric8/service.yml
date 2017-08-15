@@ -1,7 +1,7 @@
 spec:
   ports:
   - name: "http"
-    port: 7070
+    port: 8080
     protocol: "TCP"
-    targetPort: 7070
+    targetPort: 8080
 

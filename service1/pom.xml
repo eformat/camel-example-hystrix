@@ -141,7 +141,7 @@
                         <config>
                             <spring-boot>
                                 <fromMode>istag</fromMode>
-                                <from>openshift/openjdk18-openshift:latest</from>
+                                <from>openshift/fis-java-openshift:latest</from>
                             </spring-boot>
                         </config>
                     </generator>
