@@ -189,15 +189,28 @@ objects:
     resources: {}
     runPolicy: Serial
     source:
-      binary: {}
-      type: Binary
+      contextDir: service1
+      git:
+        uri: https://github.com/eformat/camel-example-hystrix.git
+      type: Git
     strategy:
       sourceStrategy:
+        env:
+        - name: MAVEN_MIRROR_URL
+          value: http://nexus.nexus.svc.cluster.local:8081/repository/maven-public/
         from:
           kind: ImageStreamTag
           name: fis-java-openshift:latest
           namespace: openshift
       type: Source
     successfulBuildsHistoryLimit: 5
-    triggers: []
+    - github:
+        secret: secret1
+      type: GitHub
+    - generic:
+        secret: secret1
+      type: Generic
+    - type: ConfigChange
+    - imageChange: {}
+      type: ImageChange
   status: []
