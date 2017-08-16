@@ -18,7 +18,28 @@ Where client -> service1
 Service1 is configured in the `src/main/java/sample/camel/Service1Application.java` source code.
 Service2 is configured in the `src/main/resources/application.properties` properties file.
 
-### Build
+### Run on OpenShift
+
+TLDR - i use a locally deployed Nexus in the templates build environment:
+
+```
+oc new-project nexus --display-name="Nexus" --description="Nexus"
+oc new-app -f https://raw.githubusercontent.com/eformat/openshift-nexus/master/nexus.yaml
+```
+
+Deploy all the apps:
+
+```
+oc new-project hystrixdemo --display-name="Hystrix Demo" --description="Hystrix Demo"
+oc policy add-role-to-user view --serviceaccount=default -n $(oc project -q)
+oc process -f https://raw.githubusercontent.com/eformat/camel-example-hystrix/master/service1/service1-template.yaml | oc create -f-
+oc process -f https://raw.githubusercontent.com/eformat/camel-example-hystrix/master/service2/service2-template.yaml | oc create -f-
+oc process -f https://raw.githubusercontent.com/eformat/camel-example-hystrix/master/client/client-template.yaml | oc create -f-
+oc process -f https://raw.githubusercontent.com/eformat/camel-example-hystrix/master/kubeflix/kubeflix.json | oc create -f-
+```
+
+
+### Build locally
 
 You will need to compile this example first:
 
@@ -26,7 +47,7 @@ You will need to compile this example first:
 $ mvn compile
 ```
 
-### Run the example
+### Run the example locally
 
 Then using three different shells and run service1 and service2 before the client.
 

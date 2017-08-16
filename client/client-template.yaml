@@ -151,7 +151,6 @@ objects:
         from:
           kind: ImageStreamTag
           name: camel-example-hystrix-client:latest
-          namespace: hystrixdemo-developer
       type: ImageChange
   status: []
 - apiVersion: v1
