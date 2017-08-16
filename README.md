@@ -73,6 +73,31 @@ $ mvn compile spring-boot:run
 You can then stop service1 and see that the client should fallback to call service2 in the Hystrix EIP circuit breaker.
 And then start service 1 again and see the Hystrix EIP go back to normal.
 
+### OpenShift local development
+
+If you have minishift, oc cluster up environment, login, create a project as per above. You can locally develop using fabric8 maven tooling
+
+Service1
+
+```
+cd ~/git/camel-example-hystrix/service1
+mvn fabric8:deploy
+```
+
+Service2
+
+```
+cd /home/mike/git/camel-example-hystrix/service2
+mvn fabric8:deploy
+```
+
+Client
+
+```
+cd ~/git/camel-example-hystrix/client
+mvn fabric8:deploy
+```
+
 ### Hystrix web console
 
 You should be able to visualize the state of the Hystrix Circuit Breaker in the Hystrix Web Console.
