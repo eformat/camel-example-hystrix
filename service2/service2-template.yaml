@@ -30,7 +30,7 @@ objects:
       provider: fabric8
     sessionAffinity: None
     type: ClusterIP
-  status: []
+  status: {}
 - apiVersion: v1
   kind: Route
   metadata:
@@ -52,7 +52,7 @@ objects:
       name: camel-example-hystrix-service2
       weight: 100
     wildcardPolicy: None
-  status: []
+  status: {}
 - apiVersion: v1
   kind: ImageStream
   metadata:
@@ -151,7 +151,7 @@ objects:
           kind: ImageStreamTag
           name: camel-example-hystrix-service2:latest
       type: ImageChange
-  status: []
+  status: {}
 - apiVersion: v1
   kind: BuildConfig
   metadata:
@@ -198,4 +198,4 @@ objects:
     - type: ConfigChange
     - imageChange: {}
       type: ImageChange
-  status: []
+  status: {}

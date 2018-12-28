@@ -13,7 +13,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.5.6.RELEASE</version>
+        <version>1.5.13.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -21,12 +21,13 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <maven-compiler-plugin.version>3.6.2</maven-compiler-plugin.version>
+        <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
         <maven-surefire-plugin.version>2.20</maven-surefire-plugin.version>
-        <spring-boot.version>1.5.6.RELEASE</spring-boot.version>
+        <spring-boot.version>1.5.13.RELEASE</spring-boot.version>
         <fabric8.version>2.3.3</fabric8.version>
-        <fabric8.maven.plugin.version>3.5.22</fabric8.maven.plugin.version>
+        <fabric8.maven.plugin.version>3.5.33.fuse-710023-redhat-00002</fabric8.maven.plugin.version>
         <spring-cloud-kubernetes.version>0.1.6</spring-cloud-kubernetes.version>
+        <openshift.istag>openshift/jboss-fuse70-java-openshift:1.0</openshift.istag>
     </properties>
 
     <dependencyManagement>
@@ -141,7 +142,7 @@
                         <config>
                             <spring-boot>
                                 <fromMode>istag</fromMode>
-                                <from>openshift/fis-java-openshift:latest</from>
+                                <from>${openshift.istag}</from>
                             </spring-boot>
                         </config>
                     </generator>
