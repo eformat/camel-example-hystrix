@@ -26,7 +26,7 @@
         <spring-boot.version>1.5.13.RELEASE</spring-boot.version>
         <fabric8.version>2.3.3</fabric8.version>
         <fabric8.maven.plugin.version>3.5.33.fuse-710023-redhat-00002</fabric8.maven.plugin.version>
-        <spring-cloud-kubernetes.version>0.1.6</spring-cloud-kubernetes.version>
+        <spring-cloud-version>1.4.6.RELEASE</spring-cloud-version>
         <openshift.istag>openshift/jboss-fuse70-java-openshift:1.0</openshift.istag>
     </properties>
 
