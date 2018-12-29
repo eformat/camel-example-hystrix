@@ -184,7 +184,7 @@ objects:
           value: http://nexus.nexus.svc.cluster.local:8081/repository/maven-public/
         from:
           kind: ImageStreamTag
-          name: fis-java-openshift:latest
+          name: jboss-fuse70-java-openshift:1.0
           namespace: openshift
       type: Source
     successfulBuildsHistoryLimit: 5
